@@ -29,7 +29,7 @@ public class ValidateDeletedCustomer extends BaseTest {
 		int statusCode = response.getStatusCode();
 		System.out.println(statusCode);
 		Assert.assertEquals(statusCode, 200);
-		System.out.println("*************************");
+		System.out.println("************-************");
 		
 		//to check if the given id is deleted
 		String actualId = response.jsonPath().get("id").toString();
