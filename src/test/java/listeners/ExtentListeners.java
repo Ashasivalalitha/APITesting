@@ -1,8 +1,15 @@
 package listeners;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
+import org.testng.ISuite;
+import org.testng.ISuiteListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -14,7 +21,10 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-public class ExtentListeners implements ITestListener{
+import utilities.MonitoringMail;
+import utilities.TestConfig;
+
+public class ExtentListeners implements ITestListener, ISuiteListener{
 
 	static Date d = new Date();
 	static String reportName = "Extent_"+d.toString().replace(":", "_").replace(" ", "_")+".html";
@@ -89,5 +99,30 @@ public class ExtentListeners implements ITestListener{
 		}
 	}
 
+	
+	@Override
+	public void onFinish(ISuite suite) {
+		
+		MonitoringMail mail = new MonitoringMail();
+		
+		String myAddress = null;
+		try {
+			myAddress = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+		}
+		String messageBody = "http://"+myAddress+":8080/job/RestAssuredAPI/Extent_20Report/"+reportName;
+		
+		//mail.sendMail(TestConfig.server, TestConfig.from, TestConfig.to, TestConfig.subject, messageBody);
+		try {
+			mail.sendMail(TestConfig.server, TestConfig.from, TestConfig.to, TestConfig.subject, "<a target=\"_blank\" href="+messageBody+">Link to report</a>");
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 }
