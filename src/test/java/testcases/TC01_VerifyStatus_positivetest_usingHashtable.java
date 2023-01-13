@@ -25,7 +25,7 @@ public class TC01_VerifyStatus_positivetest_usingHashtable extends BaseTest {
 
 		Response response = CreateCustomerAPI.createCustomer_positive(data);
 		ExtentListeners.testReport.get().info(data.toString());
-		//response.prettyPrint();
+		// response.prettyPrint();
 		int statusCode = response.getStatusCode();
 		System.out.println(response.statusCode());
 		Assert.assertEquals(statusCode, 200);
