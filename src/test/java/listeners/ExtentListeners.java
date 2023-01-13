@@ -102,7 +102,7 @@ public class ExtentListeners implements ITestListener, ISuiteListener{
 	
 	@Override
 	public void onFinish(ISuite suite) {
-		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!starting to send mail");
 		MonitoringMail mail = new MonitoringMail();
 		
 		String myAddress = null;
@@ -114,7 +114,7 @@ public class ExtentListeners implements ITestListener, ISuiteListener{
 		
 		//mail.sendMail(TestConfig.server, TestConfig.from, TestConfig.to, TestConfig.subject, messageBody);
 		try {
-			mail.sendMail(TestConfig.server, TestConfig.from, TestConfig.to, TestConfig.subject, "<a target=\"_blank\" href="+messageBody+">Link to report</a>");
+			mail.sendMail(TestConfig.server, TestConfig.from, TestConfig.to, TestConfig.subject, "<a target=\"_blank\" href="+messageBody+">Link to report : "+messageBody+"</a>");
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
