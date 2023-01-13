@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="none">
+
+<listeners>
+<listener class-name="listeners.ExtentListeners"></listener>
+</listeners>
+
+  <test thread-count="5" name="TC1_VerifyStatus_positivetest">
+    <classes>
+      <class name="testcases.TC01_VerifyStatus_positivetest_usingHashtable"/>
+    </classes>
+  </test> <!-- Test -->
+  
+    <test thread-count="5" name="TC2_VerifyStatus_negativetest">
+    <classes>
+      <class name="testcases.TC02_VerifyStatus_negativetest_usingHashtable"/>
+    </classes>
+  </test> <!-- Test -->
+  
+   <test thread-count="5" name="TC3_DeleteCustomer">
+    <classes>
+      <class name="testcases.TC03_DeleteCustomer"/>
+    </classes>
+  </test> <!-- Test -->
+  
+  
+    <test thread-count="5" name="TC4_ValidateDeletedCustomer">
+    <classes>
+      <class name="testcases.ValidateDeletedCustomer"/>
+    </classes>
+  </test> <!-- Test -->
+  
+  
+</suite> <!-- Suite -->
